@@ -6,7 +6,10 @@ This non-opinionated library transforms named parameters into traditional
 positional parameters.
 
 ```JavaScript
-  const result = transform({query:'select * from hello where id=$id', params:{ id: "foo" }});
+  const result = transform({
+    query:'select * from hello where id=$id', 
+    params:{ id: "foo" }
+  });
   console.log( result.transformedQuery ); //  'select * from hello where id=$1'
   console.log( result.positionalParams ); // [ 'foo' ]
 ```
@@ -14,7 +17,10 @@ positional parameters.
 For those who want to save your precious finger power,
 
 ```JavaScript
-  const result = transform({query:'select * from hello where id=$id', params:{ id: "foo" }});
+  const result = transform({
+    query:'select * from hello where id=$id',
+    params:{ id: "foo" }
+  });
   console.log( result.query  ); //  'select * from hello where id=$1'
   console.log( result.params ); // [ 'foo' ]
 ```
@@ -84,10 +90,10 @@ Otherwise, this library may be going to work well and reduce size of your code.
 
  History
 --------------------------------------------------------------------------------
-- 0.1.0 :  The first version.
-
+- 0.1.0 : The first version.
 - 0.1.1 : Supported `DEFAULT`.
-
+- 0.1.2 : Updated the document.
+- 0.1.3 : Updated the document.
 
  Conclusion
 --------------------------------------------------------------------------------
