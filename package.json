@@ -37,11 +37,11 @@
   },
   "author": {
     "name": "Atsushi Oka",
-    "url": "https://github.com/a-oka-z/prevent-undefined"
+    "url": "https://github.com/a-oka-z/sql-named-parameters"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/a-oka-z/prevent-undefined"
+    "url": "https://github.com/a-oka-z/sql-named-parameters"
   },
   "license": "ISC",
   "devDependencies": {
