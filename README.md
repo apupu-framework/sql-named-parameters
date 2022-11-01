@@ -11,7 +11,7 @@ positional parameters.
   console.log( result.positionalParams ); // [ 'foo' ]
 ```
 
-For those want to save your precious finger power,
+For those who want to save your precious finger power,
 
 ```JavaScript
   const result = transform({query:'select * from hello where id=$id', params:{ id: "foo" }});
