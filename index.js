@@ -33,16 +33,32 @@ const compile = ({ query, params })=>{
    */
   const k2i  = {};
 
+
+  /*
+   * The interned symbol to be interpolated as a SQL reserved word `DEFAULT`
+   * that should be treated as the default value in UPDATE/INSERT clause.
+   */
+  const DEFAULT = Symbol.for('DEFAULT');
+
   const compiledQuery = query.replace( /\$([a-zA-Z0-9_]+)/g, function(s,m1) {
     const key = m1;
-    if ( Object.hasOwn( k2i, key ) ) { 
+    if ( Object.hasOwn( k2i, key ) ) {
       const indexNumber = k2i[ key ];
-      return '$' + indexNumber;
+      if ( indexNumber === DEFAULT ) {
+        return 'DEFAULT';
+      } else {
+        return '$' + indexNumber;
+      }
     } else {
-      const indexNumber = i2k.length;
-      i2k.push( key );
-      k2i[ key ] = indexNumber;
-      return '$' + indexNumber;
+      if ( namedParams[key] === DEFAULT ) {
+        k2i[ key ] = DEFAULT;
+        return 'DEFAULT';
+      } else {
+        const indexNumber = i2k.length;
+        i2k.push( key );
+        k2i[ key ] = indexNumber;
+        return '$' + indexNumber;
+      }
     }
   });
 
