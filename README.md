@@ -77,9 +77,10 @@ That's where this library comes in.
  CAUTION
 --------------------------------------------------------------------------------
 This library is a kind of SQL generator. Any libraries that generate SQL are
-inherently vulnable for SQL injection. For me, it seems safe enough to use in
-production; but you cannot believe it if you are using this in a system at a
-nuclear plant,  a serious banking system or something you think it is precious.
+inherently vulnerable for SQL injection. For me, it seems safe enough to use in
+production; but you cannot believe me especially if you are using this in a
+system at a nuclear plant, a serious banking system or something you think it
+is precious.
 
 IF YOU DON'T KNOW WHAT YOU ARE DOING, THEN DON'T USE THIS LIBRARY. 
 
@@ -95,9 +96,9 @@ Otherwise, this library may be going to work well and reduce size of your code.
 - 0.1.2 : Updated the document.
 - 0.1.3 : Updated the document.
 
+
  Conclusion
 --------------------------------------------------------------------------------
-Thank you very much for your kind attention and excuse my poor English.
-
+That's all. Thank you very much for your kind attention.
 
 
