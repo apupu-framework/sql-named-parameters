@@ -95,6 +95,7 @@ Otherwise, this library may be going to work well and reduce size of your code.
 - 0.1.1 : Supported `DEFAULT`.
 - 0.1.2 : Updated the document.
 - 0.1.3 : Updated the document.
+- 0.1.4 : Throw more informative error messages. (Mon, 07 Nov 2022 18:43:17 +0900)
 
 
  Conclusion

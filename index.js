@@ -50,7 +50,7 @@ const compile = ({ query, params })=>{
         return '$' + indexNumber;
       }
     } else {
-      if ( namedParams[key] === DEFAULT ) {
+      if ((key in namedParams ) && ( namedParams[key] === DEFAULT)  ) {
         k2i[ key ] = DEFAULT;
         return 'DEFAULT';
       } else {
@@ -65,7 +65,7 @@ const compile = ({ query, params })=>{
   return { compiledQuery, i2k, k2i };
 };
 
-const bind = ({compiledQuery, i2k, k2i, params})=>{
+const bind = ({query, compiledQuery, i2k, k2i, params})=>{
   const namedParams = checkNamedParam( params );
 
   const positionalParams = [];
@@ -73,7 +73,7 @@ const bind = ({compiledQuery, i2k, k2i, params})=>{
   for ( let i=1; i< i2k.length; i++ ) {
     // console.log( 'i2k[i] in namedParams' , i2k[i] in namedParams  );
     if ( ! ( i2k[i] in namedParams ) ) {
-      throw new ReferenceError({ message : `the query requires '${inspect(i2k[i])}' to bind, but no such key was supplied in the argument in \n${ inspect(namedParams) }` });
+      throw new ReferenceError(`the query requires '${inspect(i2k[i])}' to bind, but no such key was supplied in the argument in \n${ inspect(namedParams) }.\n\nquery:\n${query}\n` );
     }
 
     positionalParams.push( namedParams[ i2k[i] ] );
@@ -82,8 +82,8 @@ const bind = ({compiledQuery, i2k, k2i, params})=>{
 };
 
 const transform = ({query,params})=>{
-  const  { compiledQuery,   i2k, k2i       } = compile({         query,           params });
-  const  { positionalParams                } = bind   ({ compiledQuery, i2k, k2i, params });
+  const  { compiledQuery,   i2k, k2i       } = compile({ query,                          params });
+  const  { positionalParams                } = bind   ({ query, compiledQuery, i2k, k2i, params });
   return { 
     query            : compiledQuery, 
     params           : positionalParams,
