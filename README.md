@@ -82,23 +82,23 @@ Double dollar `$$` will be replaced with `$`
   const result = transform({
     query:
     `
-      create or replace function test_func() RETURNS uuid as
+      CREATE OR REPLACE FUNCTION test_func() RETURNS uuid AS
       $$SQL$$
-      begin
+      BEGIN
         RETURN gen_random_uuid();
-      end
+      END
       $$SQL$$ LANGUAGE plpgsql;
     `,
     params: []
   });
   console.error( result.transformedQuery );
 
-> create or replace function test_func() RETURNS uuid as
-> $SQL$
-> begin
->   RETURN gen_random_uuid();
-> end
-> $SQL$ LANGUAGE plpgsql;
+>      CREATE OR REPLACE FUNCTION test_func() RETURNS uuid AS
+>      $SQL$
+>      BEGIN
+>        RETURN gen_random_uuid();
+>      END
+>      $SQL$ LANGUAGE plpgsql;
 ```
 
 
