@@ -96,7 +96,7 @@ Double dollar `$$` will be replaced with `$`
 > create or replace function test_func() RETURNS uuid as
 > $SQL$
 > begin
-> RETURN gen_random_uuid();
+>   RETURN gen_random_uuid();
 > end
 > $SQL$ LANGUAGE plpgsql;
 ```
