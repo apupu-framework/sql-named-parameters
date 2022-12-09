@@ -74,6 +74,34 @@ That's where this library comes in.
   console.log( result.params ); // [ ]
 ```
 
+ About Escape Sequence `$$`
+--------------------------------------------------------------------------------
+Double dollar `$$` will be replaced with `$`
+
+```SQL
+  const result = transform({
+    query:
+    `
+      create or replace function test_func() RETURNS uuid as
+      $$SQL$$
+      begin
+        RETURN gen_random_uuid();
+      end
+      $$SQL$$ LANGUAGE plpgsql;
+    `,
+    params: []
+  });
+  console.error( result.transformedQuery );
+
+> create or replace function test_func() RETURNS uuid as
+> $SQL$
+> begin
+> RETURN gen_random_uuid();
+> end
+> $SQL$ LANGUAGE plpgsql;
+```
+
+
  CAUTION
 --------------------------------------------------------------------------------
 This library is a kind of SQL generator. Any libraries that generate SQL are
@@ -96,6 +124,7 @@ Otherwise, this library may be going to work well and reduce size of your code.
 - 0.1.2 : Updated the document.
 - 0.1.3 : Updated the document.
 - 0.1.4 : Throw more informative error messages. (Mon, 07 Nov 2022 18:43:17 +0900)
+- 0.1.5 : Added escape sequence `$$`. (Fri, 09 Dec 2022 18:54:53 +0900)
 
 
  Conclusion

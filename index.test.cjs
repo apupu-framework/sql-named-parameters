@@ -599,3 +599,31 @@ test( 'No.20 array part5 - corner case 4 sparse with DEFAULT', ()=>{
 });
 
 
+
+test( 'escape sequence 1', ()=>{
+  const result = transform({
+    query:
+    `
+      create or replace function test_func() RETURNS uuid as
+      $$SQL$$
+      begin
+        RETURN gen_random_uuid();
+      end
+      $$SQL$$ LANGUAGE plpgsql;
+    `,
+    params: [
+    ]
+  });
+  // console.error( result );
+  expect( result.transformedQuery ).toBe(
+    `
+      create or replace function test_func() RETURNS uuid as
+      $SQL$
+      begin
+        RETURN gen_random_uuid();
+      end
+      $SQL$ LANGUAGE plpgsql;
+    `
+  )
+});
+

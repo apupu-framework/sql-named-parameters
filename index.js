@@ -14,7 +14,12 @@ const checkNamedParam = ( params )=>{
   }
 };
 
+const CONST_DOLLAR_SIGN = '__CONST_DOLLAR_SIGN_ESCAPE_SEQUENCE_CONST__';
+
 const compile = ({ query, params })=>{
+  // replaceAll() to escape sequence `$$`; added on (Fri, 09 Dec 2022 18:47:14 +0900)
+  query = query.replaceAll( '$$', CONST_DOLLAR_SIGN );
+
   const namedParams = checkNamedParam( params );
 
   /*
@@ -60,7 +65,9 @@ const compile = ({ query, params })=>{
         return '$' + indexNumber;
       }
     }
-  });
+  }).replaceAll( CONST_DOLLAR_SIGN, '$$' );
+
+  // ^^^ replaceAll() to escape sequence `$$`; added on (Fri, 09 Dec 2022 18:47:14 +0900)
 
   return { compiledQuery, i2k, k2i };
 };

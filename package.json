@@ -1,6 +1,6 @@
 {
   "name": "sql-named-parameters",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "This non-opinionated library transforms named parameters into traditional positional parameters.",
   "main": "index.mjs",
   "type": "module",
@@ -19,6 +19,12 @@
     "test": "npm run make; npm run test-cs; npm run test-es6",
     "make": "node ./make.js"
   },
+  "files": [
+    "README.md",
+    "index.cjs",
+    "index.mjs",
+    "package.json"
+  ],
   "jest": {
     "moduleFileExtensions": [
       "js",
