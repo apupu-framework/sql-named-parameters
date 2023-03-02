@@ -25,7 +25,7 @@ test( 'No.4 multiple columns', ()=>{
     `
       INSERT INTO test_tbl (  col1,  col2 , col3,  col4,  col5 )
       VALUES               ( $col1, $col2, $col3, $col4, $col5 )`,
-    params:{ 
+    params:{
       col1: 'col1',
       col2: 'col2',
       col3: 'col3',
@@ -54,7 +54,7 @@ test( 'No.5 multiple columns with DEFAULT part1', ()=>{
     `
       INSERT INTO test_tbl (  col1,  col2 , col3,  col4,  col5 )
       VALUES               ( $col1, $col2, $col3, $col4, $col5 )`,
-    params:{ 
+    params:{
       col1: DEFAULT,
       col2: 'col2',
       col3: 'col3',
@@ -83,7 +83,7 @@ test( 'No.6 multiple columns with DEFAULT part2', ()=>{
     `
       INSERT INTO test_tbl (  col1,  col2 , col3,  col4,  col5 )
       VALUES               ( $col1, $col2, $col3, $col4, $col5 )`,
-    params:{ 
+    params:{
       col1: 'col1',
       col2: 'col2',
       col3: 'col3',
@@ -111,7 +111,7 @@ test( 'No.7 multiple columns with DEFAULT part3', ()=>{
     `
       INSERT INTO test_tbl (  col1,  col2 , col3,  col4,  col5 )
       VALUES               ( $col1, $col2, $col3, $col4, $col5 )`,
-    params:{ 
+    params:{
       col1: 'col1',
       col2: 'col2',
       col3: DEFAULT,
@@ -140,7 +140,7 @@ test( 'No.8 multiple columns with two DEFAULT values', ()=>{
     `
       INSERT INTO test_tbl (  col1,  col2 , col3,  col4,  col5 )
       VALUES               ( $col1, $col2, $col3, $col4, $col5 )`,
-    params:{ 
+    params:{
       col1: 'col1',
       col2: DEFAULT,
       col3: DEFAULT,
@@ -170,7 +170,7 @@ test( 'No.9 multiple columns with all DEFAULT values', ()=>{
     `
       INSERT INTO test_tbl (  col1,  col2 , col3,  col4,  col5 )
       VALUES               ( $col1, $col2, $col3, $col4, $col5 )`,
-    params:{ 
+    params:{
       col1: DEFAULT,
       col2: DEFAULT,
       col3: DEFAULT,
@@ -195,7 +195,7 @@ test( 'No.10 multiple columns with back reference', ()=>{
     `
       INSERT INTO test_tbl (  col1,  col2 , col3,  col4,  col5 )
       VALUES               ( $col1, $col2, $col3, $col1, $col5 )`,
-    params:{ 
+    params:{
       col1: 'col1',
       col2: 'col2',
       col3: 'col3',
@@ -225,7 +225,7 @@ test( 'No.11 multiple columns with back reference with DEFAULT part1', ()=>{
     `
       INSERT INTO test_tbl (  col1,  col2 , col3,  col4,  col5 )
       VALUES               ( $col1, $col2, $col3, $col1, $col5 )`,
-    params:{ 
+    params:{
       col1: DEFAULT,
       col2: 'col2',
       col3: 'col3',
@@ -254,7 +254,7 @@ test( 'No.12 multiple columns with back reference with DEFAULT part2', ()=>{
     `
       INSERT INTO test_tbl (  col1,  col2 , col3,  col4,  col5 )
       VALUES               ( $col1, $col2, $col3, $col1, $col5 )`,
-    params:{ 
+    params:{
       col1: 'col1',
       col2: 'col2',
       col3: 'col3',
@@ -281,7 +281,7 @@ test( 'No.13 multiple columns with back reference with DEFAULT part3', ()=>{
     `
       INSERT INTO test_tbl (  col1,  col2 , col3,  col4,  col5 )
       VALUES               ( $col1, $col2, $col3, $col1, $col5 )`,
-    params:{ 
+    params:{
       col1: 'col1',
       col2: 'col2',
       col3: DEFAULT,
@@ -608,6 +608,34 @@ test( 'escape sequence 1', ()=>{
         RETURN gen_random_uuid();
       end
       $$SQL$$ LANGUAGE plpgsql;
+    `,
+    params: [
+    ]
+  });
+  // console.error( result );
+  expect( result.transformedQuery ).toBe(
+    `
+      create or replace function test_func() RETURNS uuid as
+      $SQL$
+      begin
+        RETURN gen_random_uuid();
+      end
+      $SQL$ LANGUAGE plpgsql;
+    `
+  )
+});
+
+
+test( 'variable names with dollar sign in the middle of themself', ()=>{
+  const result = transform({
+    query:
+    `
+      create or replace function test_func() RETURNS uuid as
+      $SQL$
+      begin
+        RETURN gen_random_uuid();
+      end
+      $SQL$ LANGUAGE plpgsql;
     `,
     params: [
     ]

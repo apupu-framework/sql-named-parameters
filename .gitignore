@@ -1,2 +1,6 @@
 node_modules/
 package-lock.json
+index.test.cjs
+index.test.mjs
+index.cjs
+index.mjs

@@ -4,7 +4,7 @@ const checkNamedParam = ( params )=>{
     return {};
   } else if ( Array.isArray( params ) ) {
     // add null before everything; the numbers in the parameter start from
-    // one while the index numbers are zero-based numbers. 
+    // one while the index numbers are zero-based numbers.
     // 20221018172852
     // (Tue, 18 Oct 2022 17:25:31 +0900)
     //              vvvv
@@ -45,7 +45,13 @@ const compile = ({ query, params })=>{
    */
   const DEFAULT = Symbol.for('DEFAULT');
 
-  const compiledQuery = query.replace( /\$([a-zA-Z0-9_]+)/g, function(s,m1) {
+  const compiledQuery = query.replace( /\$([a-zA-Z0-9_$]+)/g, function(s,m1) {
+    // ADDED ON (Thu, 02 Mar 2023 13:31:36 +0900)
+    // If there are any dollar signs in the middle of the matched string, pass it through.
+    if ( 0<=m1.indexOf('$') ) {
+      return s;
+    }
+
     const key = m1;
     if ( Object.hasOwn( k2i, key ) ) {
       const indexNumber = k2i[ key ];
@@ -91,11 +97,11 @@ const bind = ({query, compiledQuery, i2k, k2i, params})=>{
 const transform = ({query,params})=>{
   const  { compiledQuery,   i2k, k2i       } = compile({ query,                          params });
   const  { positionalParams                } = bind   ({ query, compiledQuery, i2k, k2i, params });
-  return { 
-    query            : compiledQuery, 
+  return {
+    query            : compiledQuery,
     params           : positionalParams,
-    transformedQuery : compiledQuery, 
-    positionalParams : positionalParams 
+    transformedQuery : compiledQuery,
+    positionalParams : positionalParams
   };
 };
 

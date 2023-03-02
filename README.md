@@ -74,8 +74,46 @@ That's where this library comes in.
   console.log( result.params ); // [ ]
 ```
 
+ Variable Names with Any Dollar Signs in Themself
+--------------------------------------------------------------------------------
+While this library regards any word starts with a dollar sign as a variable
+name, it will exclude those in which there are any dollar signs in the
+middle/in the end of itself.
+
+This feature is intended to pass PostgreSQL's dollar-quoted string constants.
+
+```SQL
+  const result = transform({
+    query:
+    `
+      CREATE OR REPLACE FUNCTION test_func() RETURNS uuid AS
+      $SQL$
+      BEGIN
+        RETURN gen_random_uuid();
+      END
+      $SQL$ LANGUAGE plpgsql;
+    `,
+    params: []
+  });
+  console.error( result.transformedQuery );
+
+>      CREATE OR REPLACE FUNCTION test_func() RETURNS uuid AS
+>      $SQL$
+>      BEGIN
+>        RETURN gen_random_uuid();
+>      END
+>      $SQL$ LANGUAGE plpgsql;
+```
+
+
  About Escape Sequence `$$`
 --------------------------------------------------------------------------------
+#### This function is deprecated ####
+This function is deprecated; all newly started projects should not use this feature.
+As of Mar 2 2023, PostgreSQL's dollar-quoted strings are safely ignored. This feature
+is not necessary anymore.
+
+#### Description ####
 Double dollar `$$` will be replaced with `$`
 
 ```SQL
@@ -125,6 +163,8 @@ Otherwise, this library may be going to work well and reduce size of your code.
 - 0.1.3 : Updated the document.
 - 0.1.4 : Throw more informative error messages. (Mon, 07 Nov 2022 18:43:17 +0900)
 - 0.1.5 : Added escape sequence `$$`. (Fri, 09 Dec 2022 18:54:53 +0900)
+- 1.0.6 : All variable names contains any dollar signs should be ignored
+          (Thu, 02 Mar 2023 13:58:55 +0900)
 
 
  Conclusion

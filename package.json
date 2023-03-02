@@ -1,6 +1,6 @@
 {
   "name": "sql-named-parameters",
-  "version": "0.1.5",
+  "version": "1.0.6",
   "description": "This non-opinionated library transforms named parameters into traditional positional parameters.",
   "main": "index.mjs",
   "type": "module",
@@ -43,11 +43,11 @@
   },
   "author": {
     "name": "Atsushi Oka",
-    "url": "https://github.com/a-oka-z/sql-named-parameters"
+    "url": "https://github.com/ats4u"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/a-oka-z/sql-named-parameters"
+    "url": "https://github.com/apupu-framework/sql-named-parameters"
   },
   "license": "ISC",
   "devDependencies": {
