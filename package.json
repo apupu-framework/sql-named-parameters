@@ -50,7 +50,9 @@
     "url": "https://github.com/apupu-framework/sql-named-parameters"
   },
   "license": "ISC",
-  "devDependencies": {
+  "bak-devDependencies": {
     "sqlmacro": "^0.1.0"
+  },
+  "devDependencies": {
   }
 }
