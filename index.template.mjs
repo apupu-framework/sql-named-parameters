@@ -15,3 +15,8 @@ export {
   bind,
   transform,
 };
+export default {
+  compile,
+  bind,
+  transform,
+};
