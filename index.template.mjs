@@ -14,9 +14,11 @@ export {
   compile,
   bind,
   transform,
+  DEFAULT,
 };
 export default {
   compile,
   bind,
   transform,
+  DEFAULT,
 };

@@ -26,6 +26,12 @@ const checkNamedParam = ( params )=>{
 
 const CONST_DOLLAR_SIGN = '__CONST_DOLLAR_SIGN_ESCAPE_SEQUENCE_CONST__';
 
+/*
+ * The interned symbol to be interpolated as a SQL reserved word `DEFAULT`
+ * that should be treated as the default value in UPDATE/INSERT clause.
+ */
+const DEFAULT = Symbol.for('DEFAULT');
+
 const compile = ({ query, params })=>{
   // replaceAll() to escape sequence `$$`; added on (Fri, 09 Dec 2022 18:47:14 +0900)
   query = query.replaceAll( '$$', CONST_DOLLAR_SIGN );
@@ -48,12 +54,6 @@ const compile = ({ query, params })=>{
    */
   const k2i  = {};
 
-
-  /*
-   * The interned symbol to be interpolated as a SQL reserved word `DEFAULT`
-   * that should be treated as the default value in UPDATE/INSERT clause.
-   */
-  const DEFAULT = Symbol.for('DEFAULT');
 
   const compiledQuery = query.replace( /\$([a-zA-Z0-9_$]+)/g, function(s,m1) {
     // ADDED ON (Thu, 02 Mar 2023 13:31:36 +0900)
@@ -120,3 +120,4 @@ const transform = ({query,params})=>{
 module.exports.compile    = compile;
 module.exports.bind       = bind;
 module.exports.transform  = transform;
+module.exports.DEFAULT    = DEFAULT;

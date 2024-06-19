@@ -14,4 +14,5 @@ function inspect(s) {
 module.exports.compile    = compile;
 module.exports.bind       = bind;
 module.exports.transform  = transform;
+module.exports.DEFAULT    = DEFAULT;
 
